@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NarutoVerse — Explore the Shinobi World </title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="public/logo.png" />
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="NarutoVerse — Explore the Shinobi World" />
+  <meta name="description" content="Discover Naruto characters, clans, and villages with live search, smooth animations, and anime-inspired design. Built using HTML, CSS, and JavaScript with Dattebayo API." />
+  <meta name="keywords" content="Naruto, Anime, Dattebayo API, Shinobi, Clans, Villages, HTML, CSS, JavaScript, NarutoVerse" />
+  <meta name="author" content="Om Malhotra" />
+  <meta name="theme-color" content="#ff6b35" />
+
+  <!-- Open Graph / Facebook / Discord -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-deployed-link.netlify.app/" />
+  <meta property="og:title" content="NarutoVerse — Explore the Shinobi World" />
+  <meta property="og:description" content="A visually stunning Naruto explorer powered by Dattebayo API. Find characters, clans, and villages with smooth UI and dark mode." />
+  <meta property="og:image" content="https://static.wikia.nocookie.net/naruto/images/3/3c/Naruto_Shippuuden_Logo.png" />
+
+  <!-- Twitter / WhatsApp Preview -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://your-deployed-link.netlify.app/" />
+  <meta name="twitter:title" content="NarutoVerse — Explore the Shinobi World" />
+  <meta name="twitter:description" content="A beautiful Naruto-themed anime explorer built using Dattebayo API." />
+  <meta name="twitter:image" content="https://static.wikia.nocookie.net/naruto/images/3/3c/Naruto_Shippuuden_Logo.png" />
+
+  <!-- Fonts and Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="#" class="logo" onclick="location.reload()">
+        <div class="logo-icon"></div>
+        NARUTOVERSE
+      </a>
+
+      <div class="navbar">
+        <nav>
+          <a href="#" id="nav-character" class="nav-link active" onclick="loadData('character')">Characters</a>
+          <a href="#" id="nav-clan" class="nav-link" onclick="loadData('clan')">Clans</a>
+          <a href="#" id="nav-village" class="nav-link" onclick="loadData('village')">Villages</a>
+        </nav>
+      </div>
+
+      <div class="header-controls">
+        <div class="search-container">
+          <input type="search" id="search-input" placeholder="Search Characters..." />
+          <button id="search-button" aria-label="Search" title="Search">
+            <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+          </button>
+        </div>
+        <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1>EXPLORE THE SHINOBI WORLD</h1>
+        <p>Welcome to the Shinobi World of Naruto where you can find your favourite characters, clans and villages</p>
+        <button id="hero-action-button" type="button" class="hero-button">Browse Characters</button>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-bar">
+      <div class="stat">
+        <h2 id="stat-characters">...</h2>
+        <p>Characters</p>
+      </div>
+      <div class="stat">
+        <h2 id="stat-clans">...</h2>
+        <p>Clans</p>
+      </div>
+      <div class="stat">
+        <h2 id="stat-villages">...</h2>
+        <p>Villages</p>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="content-area" id="content-anchor">
+      <h2 id="grid-title">Characters</h2>
+
+      <!-- Loading -->
+      <div id="loading" class="message-center hidden">
+        <div class="loader-spinner"></div>
+        <p>Summoning Jutsu... Loading Data</p>
+      </div>
+
+      <!-- Error -->
+      <div id="error-message" class="message-center error-message hidden"></div>
+
+      <!-- Grid -->
+      <div id="item-grid"></div>
+
+      <!-- Pagination -->
+      <div id="pagination" class="hidden">
+        <button id="prev-button">Previous</button>
+        <span id="page-info">Page 1 of 1</span>
+        <button id="next-button">Next</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Details Modal -->
+  <div id="details-overlay" class="hidden">
+    <div class="details-modal">
+      <div class="details-image" id="details-img"></div>
+      <div class="details-content">
+        <span id="details-close" onclick="closeDetails()">&times;</span>
+        <h2 id="details-name"></h2>
+
+        <div class="character-only-section hidden" id="section-personal">
+          <h3>Personal Info</h3>
+          <div class="details-info" id="details-info-personal"></div>
+        </div>
+
+        <div class="character-only-section hidden" id="section-rank">
+          <h3>Rank</h3>
+          <div class="details-info" id="details-info-rank"></div>
+        </div>
+
+        <div class="character-only-section hidden" id="section-jutsu">
+          <h3>Jutsu</h3>
+          <ul class="details-list" id="details-jutsu"></ul>
+        </div>
+
+        <div class="character-only-section hidden" id="section-family">
+          <h3>Family</h3>
+          <ul class="details-list" id="details-family"></ul>
+        </div>
+
+        <div id="details-section-generic" class="hidden">
+          <div id="details-generic-description"></div>
+          <h3>Known Members</h3>
+          <ul class="details-list" id="details-generic-list"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
