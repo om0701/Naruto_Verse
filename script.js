@@ -4,7 +4,8 @@ const API_BASE = 'https://dattebayo-api.onrender.com';
 const API_TIMEOUT = 30000;
 
 /* One reliable banner used everywhere (PNG) */
-const GENERIC_BANNER_URL = 'https://static.wikia.nocookie.net/naruto/images/3/3c/Naruto_Shippuuden_Logo.png';
+const GENERIC_BANNER_URL = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQqb1nFRAQqu-WbvdIv0A-2-uMpX7zDR0DFA&s';
+const village_banner=""
 const CLAN_BANNER_URL = GENERIC_BANNER_URL;
 const VILLAGE_BANNER_URL = GENERIC_BANNER_URL;
 
