@@ -6,8 +6,7 @@ It allows users to explore the Naruto universe, browse characters, clans, and vi
 ---
 
 ## Live Demo
-https://your-deployed-link.netlify.app
-
+https://om0701.github.io/Naruto_Verse/
 ---
 
 ## Features
