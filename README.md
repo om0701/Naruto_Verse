@@ -41,7 +41,7 @@ NarutoVerse/
 - CSS3  
 - JavaScript (ES6+)  
 - Dattebayo API (https://dattebayo-api.onrender.com)  
-- Deployed on  Vercel 
+- Deployed on  GitHub Pages
 
 ---
 
